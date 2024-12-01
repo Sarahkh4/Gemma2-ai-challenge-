@@ -8,9 +8,13 @@ const Storage = require('../utilities/FileStorage');
 
 const upload = multer({ storage: Storage });
 
-router.post('/uploadResume', upload.single('resume'), (req, res) => {
-    console.log("File uploaded and saved as 'resume.pdf'");
-    res.send("File uploaded successfully!");
+router.post('/uploadResume', upload.single('file'), (req, res) => {
+    try {
+        console.log("File uploaded and saved as 'resume.pdf'");
+        res.send({ message: "File uploaded successfully!", file: req.file });
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 
